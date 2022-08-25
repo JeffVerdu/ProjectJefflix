@@ -4,15 +4,25 @@
 }
 
 <h1>Soy la pagina Test</h1>
-<form>
-    <div>
-        <input asp-for="Numero1" type="number"/>
+
+<div class="card col-5">
+    <div class="card-header">
+        <h3>Calculadora</h3>
     </div>
-    <div>
-        <input asp-for="Numero2" type="number"/>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group">
+                <label>Numero 1</label>
+                <input asp-for="Numero1" type="number" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Numero 2</label>
+                <input asp-for="Numero2" type="number" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Calcular</button>
+            <div class="form-group">
+                <input asp-for="Resultado" class="form-control mt-3"/>
+            </div>
+        </form>
     </div>
-    <div>
-        <button type="submit">Calcular</button>
-    </div>
-    
-</form>
+</div>
