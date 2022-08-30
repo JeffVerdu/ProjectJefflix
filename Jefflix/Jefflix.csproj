@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DATOS\NewFolder1\" />
+    <Folder Include="DATOS\NewFolder\" />
+  </ItemGroup>
+
 </Project>
