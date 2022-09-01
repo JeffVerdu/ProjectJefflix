@@ -1,10 +1,14 @@
+using Jefflix.DATOS.Reporitorios;
+using Jefflix.DTO;
 using Jefflix.NEGOCIO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<ICalculo, Calculo2>();
+builder.Services.AddScoped<ICategoriasRepositorio, CategoriasRepositorio>();
+builder.Services.AddScoped<ICategoriaNegocio, CategoriaNegocio>();
+
 
 var app = builder.Build();
 
