@@ -6,5 +6,8 @@ namespace Jefflix.NEGOCIO
     {
         List<CategoriaDTO> obtenerCategorias();
         void crearCategoria(CategoriaDTO categoria);
+        void editarCategoria(CategoriaDTO categoriaDTO);
+        CategoriaDTO ObtenerCategoriaId(int id);
+        void eliminarCategoria(int id);
     }
 }

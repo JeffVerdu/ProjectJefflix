@@ -12,7 +12,7 @@ namespace Jefflix.Pages
 
         [BindProperty]
         [Required(ErrorMessage ="El campo nombre es requerido")]
-        public string _Nombre { get; set; }
+        public string Nombre { get; set; }
         public nueva_categoriaModel(ICategoriaNegocio categoriaNegocio)
         {
             _categoriaNegocio = categoriaNegocio;
@@ -24,7 +24,7 @@ namespace Jefflix.Pages
         {
             if (ModelState.IsValid)
             {
-                var categoriaDTO = new CategoriaDTO { Nombre = _Nombre };
+                var categoriaDTO = new CategoriaDTO { Nombre = Nombre };
                 _categoriaNegocio.crearCategoria(categoriaDTO);
                 return RedirectToPage("./Categorias");
             }

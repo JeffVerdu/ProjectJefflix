@@ -6,5 +6,8 @@ namespace Jefflix.DATOS.Reporitorios
     {
         List<Categorias> ObtenerTodas();
         void crearCategoria(Categorias categoria);
+        void editarCategoria(Categorias categoria);
+        Categorias obtenerCategoriaId(int id);
+        void eliminarCategoria(int id);
     }
 }

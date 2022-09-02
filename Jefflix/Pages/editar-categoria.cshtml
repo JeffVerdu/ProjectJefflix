@@ -1,23 +1,23 @@
 ﻿@page
-@model Jefflix.Pages.nueva_categoriaModel
+@model Jefflix.Pages.editar_categoriaModel
 @{
 }
 
 <div>
     <div class="card col-6">
         <div class="card-header bg-primary text-white">
-            <h3>Nueva Categoria</h3>
+            <h3>Editar Categoria</h3>
         </div>
         <form method="post">
             <div class="card-body">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input maxlength="50" asp-for="Nombre" class="form-control"/>
+                    <input maxlength="50" asp-for="Nombre" class="form-control" />
                     <span class="text-danger" asp-validation-for="Nombre"></span>
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Agregar</button>
+                <button type="submit" class="btn btn-success">Editar</button>
                 <a asp-page="/Categorias" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>

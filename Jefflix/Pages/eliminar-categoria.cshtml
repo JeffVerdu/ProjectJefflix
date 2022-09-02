@@ -1,0 +1,21 @@
+﻿@page
+@model Jefflix.Pages.eliminar_categoriaModel
+@{
+}
+
+<div>
+    <div class="card col-6">
+        <div class="card-header bg-primary text-white">
+            <h3>Eliminar Categoria</h3>
+        </div>
+        <form method="post">
+            <div class="card-body">
+                <p>¿Esta seguro que desea eliminar la categoria "@Model.Nombre" ?</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a asp-page="/Categorias" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

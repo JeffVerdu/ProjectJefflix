@@ -29,5 +29,20 @@ namespace Jefflix.NEGOCIO
             var categoria = new Categorias { Id = categoriaDTO.Id, Nombre = categoriaDTO.Nombre};
             _categoriasRepositorio.crearCategoria(categoria);
         }
+        public CategoriaDTO ObtenerCategoriaId(int id)
+        {
+            var categoria = _categoriasRepositorio.obtenerCategoriaId(id);
+            CategoriaDTO categoriaDTO = new CategoriaDTO { Id = categoria.Id, Nombre = categoria.Nombre };
+            return categoriaDTO;
+        }
+        public void editarCategoria(CategoriaDTO categoriaDTO)
+        {
+            var categoria = new Categorias { Id=categoriaDTO.Id, Nombre = categoriaDTO.Nombre };
+            _categoriasRepositorio.editarCategoria(categoria);
+        }
+        public void eliminarCategoria(int id)
+        {
+            _categoriasRepositorio.eliminarCategoria(id);
+        }
     }
 }

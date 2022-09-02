@@ -35,7 +35,47 @@ namespace Jefflix.DATOS.Reporitorios
             using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
             using SqlCommand cmd = new SqlCommand("sp_insertar_categoria", sql);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@nombre",categoria.Nombre));
+            cmd.Parameters.Add(new SqlParameter("@nombre", categoria.Nombre));
+            sql.Open();
+            cmd.ExecuteNonQuery();
+        }
+        public Categorias obtenerCategoriaId(int id)
+        {
+            var categoria = new Categorias();
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_obtener_categoria", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id", id));
+            sql.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var nuevaCategoria = new Categorias { Id = (int)reader["Id"], Nombre = (string)reader["Nombre"] };
+                    categoria = nuevaCategoria;
+                }
+
+                return categoria;
+
+            }
+
+        }
+        public void editarCategoria(Categorias categoria)
+        {
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_editar_categoria", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id", categoria.Id));
+            cmd.Parameters.Add(new SqlParameter("@nombre", categoria.Nombre));
+            sql.Open();
+            cmd.ExecuteNonQuery();
+        }
+        public void eliminarCategoria(int id)
+        {
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_eliminar_categoria", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id", id));
             sql.Open();
             cmd.ExecuteNonQuery();
         }
