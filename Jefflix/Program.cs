@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICategoriasRepositorio, CategoriasRepositorio>();
 builder.Services.AddScoped<ICategoriaNegocio, CategoriaNegocio>();
+builder.Services.AddScoped<ISeriesRepositorio, SeriesRepositorio>();
+builder.Services.AddScoped<ISeriesNegocio, SeriesNegocio>();
 
 
 var app = builder.Build();
