@@ -3,20 +3,20 @@
 @{
 }
 
-<div>
-    <div class="card col-6">
-        <div class="card-header bg-primary text-white">
+<div class="">
+    <div class="card col-6 border-0">
+        <div class="card-header bg-black text-white">
             <h3>Nueva Categoria</h3>
         </div>
         <form method="post">
-            <div class="card-body">
+            <div class="card-body bg-black">
                 <div class="form-group">
-                    <label>Nombre</label>
-                    <input maxlength="50" asp-for="Nombre" class="form-control"/>
+                    <label class="text-white">Nombre</label>
+                    <input maxlength="50" asp-for="Nombre" class="form-control bg-black text-white"/>
                     <span class="text-danger" asp-validation-for="Nombre"></span>
                 </div>
             </div>
-            <div class="card-footer d-flex justify-content-between">
+            <div class="card-footer d-flex justify-content-between bg-black">
                 <button type="submit" class="btn btn-success">Agregar</button>
                 <a asp-page="/Categorias" class="btn btn-secondary">Cancelar</a>
             </div>

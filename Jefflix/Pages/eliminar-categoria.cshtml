@@ -4,15 +4,15 @@
 }
 
 <div>
-    <div class="card col-6">
-        <div class="card-header bg-primary text-white">
+    <div class="card col-6 border-0">
+        <div class="card-header bg-black text-white">
             <h3>Eliminar Categoria</h3>
         </div>
         <form method="post">
-            <div class="card-body">
-                <p>¿Esta seguro que desea eliminar la categoria "@Model.Nombre" ?</p>
+            <div class="card-body bg-black">
+                <p class="text-white">¿Esta seguro que desea eliminar la categoria "@Model.Nombre" ?</p>
             </div>
-            <div class="card-footer d-flex justify-content-between">
+            <div class="card-footer d-flex justify-content-between bg-black">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
                 <a asp-page="/Categorias" class="btn btn-secondary">Cancelar</a>
             </div>
