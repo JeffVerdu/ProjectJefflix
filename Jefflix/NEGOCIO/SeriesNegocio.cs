@@ -55,5 +55,34 @@ private readonly ICategoriasRepositorio _categoriasRepositorio;
             };
             _seriesRepositorio.crearSerie(serie);
         }
+        public SerieParaEditarDTO ObtenerSerieId(int id)
+        {
+            var serie = _seriesRepositorio.obtenerSerieId(id);
+            SerieParaEditarDTO serieParaEditarDTO = new SerieParaEditarDTO { 
+                Id = serie.Id, 
+                Nombre = serie.Nombre,
+                Temporadas= serie.Temporadas,
+                Director = serie.Director,
+                FechaCreacion= serie.FechaCreacion,
+                PaisOrigen= serie.PaisOrigen,
+                IdCategoria= serie.IdCategoria,
+                Portada= serie.Portada
+            };
+            return serieParaEditarDTO;
+        }
+        public void editarSerie(SerieParaEditarDTO serieParaEditarDTO)
+        {
+            var serie = new Series {
+                Nombre = serieParaEditarDTO.Nombre,
+                Portada = serieParaEditarDTO.Portada,
+                Director = serieParaEditarDTO.Director,
+                PaisOrigen = serieParaEditarDTO.PaisOrigen,
+                Temporadas = serieParaEditarDTO.Temporadas,
+                FechaCreacion = serieParaEditarDTO.FechaCreacion == null ? null : serieParaEditarDTO.FechaCreacion,
+                IdCategoria = serieParaEditarDTO.IdCategoria
+            };
+            _seriesRepositorio.editarSerie(serie);
+        }
+
     }
 }

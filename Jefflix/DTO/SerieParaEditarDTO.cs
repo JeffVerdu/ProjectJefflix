@@ -2,8 +2,9 @@
 
 namespace Jefflix.DTO
 {
-    public class SerieParaGuardarDTO
+    public class SerieParaEditarDTO
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "El campo Nombre es requerido")]
         public string Nombre { get; set; }
         public int? Temporadas { get; set; }
