@@ -6,7 +6,9 @@ namespace Jefflix.DATOS.Reporitorios
     {
         void crearSerie(Series serie);
         void editarSerie(Series serie);
+        void eliminarSerie(int id);
         Series obtenerSerieId(int id);
         List<Series> ObtenerTodas();
+        List<Series> ObtenerTodasIndex();
     }
 }

@@ -84,6 +84,28 @@ private readonly ICategoriasRepositorio _categoriasRepositorio;
             };
             _seriesRepositorio.editarSerie(serie);
         }
+        public void eliminarSerie(int id)
+        {
+            _seriesRepositorio.eliminarSerie(id);
+        }
+        public List<SerieParaMostrarDTO> ObtenerSeriesIndex()
+        {
+            var listaSeries = new List<SerieParaMostrarDTO>();
+            var listaSeriesEntidades = _seriesRepositorio.ObtenerTodasIndex();
+            foreach (var serie in listaSeriesEntidades)
+            {
+                var serieParaGuardarDTO = new SerieParaMostrarDTO
+                {
+                    Nombre = serie.Nombre,
+                    Temporadas = serie.Temporadas == null ? null : (int)serie.Temporadas,
+                    Director = serie.Director,
+                    FechaCreacion = serie.FechaCreacion,
+                    Portada = serie.Portada
+                };
+                listaSeries.Add(serieParaGuardarDTO);
+            }
+            return listaSeries;
+        }
 
     }
 }

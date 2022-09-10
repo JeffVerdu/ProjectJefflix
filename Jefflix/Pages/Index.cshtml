@@ -3,10 +3,25 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-
-
 <div class="text-center bg-black">
     <h1 class="display-4 text-danger"><b>JEFFLIX</b></h1>
-    <p class="text-white">Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="d-flex justify-content-between">
+    @foreach (var serie in Model.Series){
+        <div style="color-scheme:dark" class="card border-0 col-3">
+            <div class="card-header bg-black text-white border-0">
+                <h3>@serie.Nombre</h3>
+            </div>
+            <div class="card-body bg-black text-white border-0">
+                <img class="img-fluid" src="@serie.Portada"/>
+            </div>
+            <div class="card-footer bg-black text-white border-0">
+                <p>@serie.Nombre</p>
+                <p>@serie.Temporadas</p>
+                <p>@serie.Director</p>
+                <p>@serie.FechaCreacion</p>
+            </div>
+        </div>
+    }
 </div>

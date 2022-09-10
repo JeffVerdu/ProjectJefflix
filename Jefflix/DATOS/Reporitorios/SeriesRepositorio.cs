@@ -24,12 +24,14 @@ namespace Jefflix.DATOS.Reporitorios
             {
                 while (reader.Read())
                 {
-                    var serie = new Series 
-                    { Id = (int)reader["Id"], 
+                    var serie = new Series
+                    {
+                        Id = (int)reader["Id"],
                         Nombre = reader["Nombre"].ToString(),
-                        Temporadas = reader["Temporadas"] == DBNull.Value ? null : (int)reader["Temporadas"], 
+                        Temporadas = reader["Temporadas"] == DBNull.Value ? null : (int)reader["Temporadas"],
                         FechaCreacion = reader["FechaCreacion"] == DBNull.Value ? null : (DateTime?)reader["FechaCreacion"],
-                        Categoria = reader["Categoria"].ToString() };
+                        Categoria = reader["Categoria"].ToString()
+                    };
                     listaSeries.Add(serie);
                 }
             }
@@ -43,9 +45,9 @@ namespace Jefflix.DATOS.Reporitorios
             using SqlCommand cmd = new SqlCommand("sp_insertar_serie", sql);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@Nombre", serie.Nombre));
-            cmd.Parameters.Add(new SqlParameter("@Temporadas", serie.Temporadas == null ? DBNull.Value: serie.Temporadas));
+            cmd.Parameters.Add(new SqlParameter("@Temporadas", serie.Temporadas == null ? DBNull.Value : serie.Temporadas));
             cmd.Parameters.Add(new SqlParameter("@Director", serie.Director == null ? DBNull.Value : serie.Director));
-            cmd.Parameters.Add(new SqlParameter("@FechaCreacion", serie.FechaCreacion == null ? DBNull.Value:serie.FechaCreacion));
+            cmd.Parameters.Add(new SqlParameter("@FechaCreacion", serie.FechaCreacion == null ? DBNull.Value : serie.FechaCreacion));
             cmd.Parameters.Add(new SqlParameter("@PaisOrigen", serie.PaisOrigen == null ? DBNull.Value : serie.PaisOrigen));
             cmd.Parameters.Add(new SqlParameter("@CategoriaId", serie.IdCategoria));
             cmd.Parameters.Add(new SqlParameter("@Portada", serie.Portada == null ? DBNull.Value : serie.Portada));
@@ -64,7 +66,8 @@ namespace Jefflix.DATOS.Reporitorios
             {
                 while (reader.Read())
                 {
-                    var nuevaSerie = new Series {
+                    var nuevaSerie = new Series
+                    {
                         Id = (int)reader["Id"],
                         Nombre = reader["Nombre"].ToString(),
                         Temporadas = reader["Temporadas"] == DBNull.Value ? null : (int)reader["Temporadas"],
@@ -78,7 +81,7 @@ namespace Jefflix.DATOS.Reporitorios
                 }
             }
 
-                return serie;
+            return serie;
 
         }
         public void editarSerie(Series serie)
@@ -97,8 +100,40 @@ namespace Jefflix.DATOS.Reporitorios
             sql.Open();
             cmd.ExecuteNonQuery();
         }
+        public void eliminarSerie(int id)
+        {
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_eliminar_serie", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id", id));
+            sql.Open();
+            cmd.ExecuteNonQuery();
+        }
+        public List<Series> ObtenerTodasIndex()
+        {
+            var listaSeries = new List<Series>();
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_obtener_todas_index", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            sql.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var serie = new Series
+                    {
+                        Nombre = reader["Nombre"].ToString(),
+                        Temporadas = reader["Temporadas"] == DBNull.Value ? null : (int)reader["Temporadas"],
+                        Director = reader["Director"] == DBNull.Value ? null : reader["Director"].ToString(),
+                        FechaCreacion = reader["FechaCreacion"] == DBNull.Value ? null : (DateTime?)reader["FechaCreacion"],
+                        Portada = reader["Portada"] == DBNull.Value ? null : reader["Portada"].ToString()
+                    };
+                    listaSeries.Add(serie);
+                }
+            }
+            return listaSeries;
+        }
 
     }
-
 }
 

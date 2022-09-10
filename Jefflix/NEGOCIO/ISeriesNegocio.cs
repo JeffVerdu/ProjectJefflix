@@ -8,8 +8,10 @@ namespace Jefflix.NEGOCIO
     {
         void crearSerie(SerieParaGuardarDTO serieParaGuardarDTO);
         void editarSerie(SerieParaEditarDTO serieParaEditarDTO);
+        void eliminarSerie(int id);
         SelectList ObtenerCategoriasLista();
         SerieParaEditarDTO ObtenerSerieId(int id);
         List<SeriesDTO> ObtenerSeries();
+        List<SerieParaMostrarDTO> ObtenerSeriesIndex();
     }
 }
