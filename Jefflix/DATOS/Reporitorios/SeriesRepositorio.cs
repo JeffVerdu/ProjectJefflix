@@ -26,8 +26,8 @@ namespace Jefflix.DATOS.Reporitorios
                     Series serie = new Series 
                     { Id = (int)reader["Id"], 
                         Nombre = reader["Nombre"].ToString(),
-                        Temporadas = (int)reader["Temporadas"], 
-                        FechaCreacion = reader["FechaCreacion"] == DBNull.Value ? null : (DateTime)reader["FechaCreacion"],
+                        Temporadas = reader["Temporadas"] == DBNull.Value ? null : (int)reader["Temporadas"], 
+                        FechaCreacion = reader["FechaCreacion"] == DBNull.Value ? null : (DateTime?)reader["FechaCreacion"],
                         Categoria = reader["Categoria"].ToString() };
                     listaSeries.Add(serie);
                 }
@@ -35,5 +35,22 @@ namespace Jefflix.DATOS.Reporitorios
 
             return listaSeries;
         }
+
+        public void crearSerie(Series serie)
+        {
+            using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
+            using SqlCommand cmd = new SqlCommand("sp_insertar_serie", sql);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@Nombre", serie.Nombre));
+            cmd.Parameters.Add(new SqlParameter("@Temporadas", serie.Temporadas == null ? DBNull.Value: serie.Temporadas));
+            cmd.Parameters.Add(new SqlParameter("@Director", serie.Director == null ? DBNull.Value : serie.Director));
+            cmd.Parameters.Add(new SqlParameter("@FechaCreacion", serie.FechaCreacion == null ? DBNull.Value:serie.FechaCreacion));
+            cmd.Parameters.Add(new SqlParameter("@PaisOrigen", serie.PaisOrigen == null ? DBNull.Value : serie.PaisOrigen));
+            cmd.Parameters.Add(new SqlParameter("@CategoriaId", serie.IdCategoria));
+            cmd.Parameters.Add(new SqlParameter("@Portada", serie.Portada == null ? DBNull.Value : serie.Portada));
+            sql.Open();
+            cmd.ExecuteNonQuery();
+        }
+
     }
 }
