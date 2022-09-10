@@ -73,6 +73,7 @@ private readonly ICategoriasRepositorio _categoriasRepositorio;
         public void editarSerie(SerieParaEditarDTO serieParaEditarDTO)
         {
             var serie = new Series {
+                Id = serieParaEditarDTO.Id,
                 Nombre = serieParaEditarDTO.Nombre,
                 Portada = serieParaEditarDTO.Portada,
                 Director = serieParaEditarDTO.Director,

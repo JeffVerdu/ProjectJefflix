@@ -13,6 +13,5 @@ namespace Jefflix.DTO
         [Required(ErrorMessage = "Debe seleccionar una Categoria")]
         public int IdCategoria { get; set; }
         public string? Portada { get; set; }
-        public string Categoria { get; set; }
     }
 }

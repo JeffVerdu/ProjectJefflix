@@ -4,6 +4,7 @@ namespace Jefflix.DTO
 {
     public class SerieParaEditarDTO
     {
+        [Required]
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo Nombre es requerido")]
         public string Nombre { get; set; }
@@ -14,6 +15,5 @@ namespace Jefflix.DTO
         [Required(ErrorMessage = "Debe seleccionar una Categoria")]
         public int IdCategoria { get; set; }
         public string? Portada { get; set; }
-        public string Categoria { get; set; }
     }
 }

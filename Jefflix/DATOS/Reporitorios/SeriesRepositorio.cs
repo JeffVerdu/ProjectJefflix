@@ -86,10 +86,11 @@ namespace Jefflix.DATOS.Reporitorios
             using SqlConnection sql = new SqlConnection(_configuration.GetConnectionString("defaultConnection"));
             using SqlCommand cmd = new SqlCommand("sp_editar_serie", sql);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@id", serie.Id));
             cmd.Parameters.Add(new SqlParameter("@nombre", serie.Nombre));
             cmd.Parameters.Add(new SqlParameter("@temporadas", serie.Temporadas == null ? DBNull.Value : serie.Temporadas));
             cmd.Parameters.Add(new SqlParameter("@director", serie.Director == null ? DBNull.Value : serie.Director));
-            cmd.Parameters.Add(new SqlParameter("@fechacrecion", serie.FechaCreacion == null ? DBNull.Value : serie.FechaCreacion));
+            cmd.Parameters.Add(new SqlParameter("@fechacreacion", serie.FechaCreacion == null ? DBNull.Value : serie.FechaCreacion));
             cmd.Parameters.Add(new SqlParameter("@paisorigen", serie.PaisOrigen == null ? DBNull.Value : serie.PaisOrigen));
             cmd.Parameters.Add(new SqlParameter("@idcategoria", serie.IdCategoria));
             cmd.Parameters.Add(new SqlParameter("@portada", serie.Portada == null ? DBNull.Value : serie.Portada));

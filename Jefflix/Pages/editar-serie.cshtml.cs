@@ -12,6 +12,9 @@ namespace Jefflix.Pages
         private readonly ISeriesNegocio _seriesNegocio;
 
         [BindProperty]
+        [Required]
+        public int Id { get; set; }
+        [BindProperty]
         public SerieParaEditarDTO Serie { get; set; }
         public SelectList CategoriasLista { get; set; }
         public editar_serieModel(ISeriesNegocio seriesNegocio)
@@ -20,15 +23,21 @@ namespace Jefflix.Pages
         }
         public void OnGet(int id)
         {
-            CategoriasLista = _seriesNegocio.ObtenerCategoriasLista();
-            var serieParaEditarDTO = _seriesNegocio.ObtenerSerieId(id);
+            Id = id;
+            var serieParaEditarDTO = new SerieParaEditarDTO();
+            serieParaEditarDTO = _seriesNegocio.ObtenerSerieId(id);
             Serie = serieParaEditarDTO;
+            CategoriasLista = _seriesNegocio.ObtenerCategoriasLista();
         }
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                _seriesNegocio.editarSerie(Serie);
+
+                var serieParaEditarDTO = new SerieParaEditarDTO ();
+                serieParaEditarDTO = Serie;
+                serieParaEditarDTO.Id = Id;
+                _seriesNegocio.editarSerie(serieParaEditarDTO);
                 return RedirectToPage("./series");
             }
             else
