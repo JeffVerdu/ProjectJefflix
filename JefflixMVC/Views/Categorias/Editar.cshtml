@@ -1,0 +1,23 @@
+﻿@using JefflixMVC.Models.DTOS
+@model CategoriaEdicionDTO
+
+<div>
+    <div class="card col-6 border-0">
+        <div class="card-header bg-black text-white">
+            <h3>Editar Categoria</h3>
+        </div>
+        <form method="post">
+            <div class="card-body bg-black">
+                <div class="form-group">
+                    <label class="text-white">Nombre</label>
+                    <input maxlength="50" asp-for=Name class="form-control bg-black text-white" />
+                    <span class="text-danger" asp-validation-for=Name></span>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between bg-black">
+                <button type="submit" class="btn btn-success">Editar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
