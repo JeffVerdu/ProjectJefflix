@@ -58,6 +58,7 @@ namespace JefflixMVC.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View();   
         }
     }
