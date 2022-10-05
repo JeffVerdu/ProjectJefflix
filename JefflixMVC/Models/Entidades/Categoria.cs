@@ -8,5 +8,7 @@ namespace JefflixMVC.Models.Entidades
         [Required(ErrorMessage = "El campo nombre es requerido")]
         [MaxLength(50)]
         public string Name { get; set; }
+        public bool Activo { get; set; }
+        public List<Serie> Series { get; set; }
     }
 }

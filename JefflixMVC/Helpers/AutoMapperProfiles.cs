@@ -12,6 +12,8 @@ namespace JefflixMVC.Helpers
             CreateMap<CategoriaCreacionDTO, Categoria>();
             CreateMap<Categoria, CategoriaEdicionDTO>();
             CreateMap<CategoriaEdicionDTO, Categoria>();
+            CreateMap<Serie, SerieDTO>();
+            CreateMap<SerieCreacionDTO, Serie>();
         }
     }
 }

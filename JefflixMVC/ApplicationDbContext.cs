@@ -10,5 +10,6 @@ namespace JefflixMVC
 
         }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Serie> Series { get; set; }
     }
 }

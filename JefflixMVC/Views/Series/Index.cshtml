@@ -1,0 +1,39 @@
+﻿@using JefflixMVC.Models.DTOS
+@model List<SerieDTO>
+
+<div class="card col-8 border-0">
+    <div class="card-header bg-black text-white d-flex justify-content-between">
+        <h3>Listado de Series</h3>
+        <a asp-controller="Series" asp-action="Nuevo" class="btn btn-success"><i class="bi bi-plus-square"></i> Nueva Serie</a>
+    </div>
+    <div class="card-body bg-black">
+        <table class="table table-borderless text-white">
+            <thead class="border-bottom">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Temporadas</th>
+                    <th>Fecha de Creación</th>
+                    <th>Categoria</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var serie in Model)
+                {
+                    <tr>
+                        <td>@serie.Id</td>
+                        <td>@serie.Nombre</td>
+                        <td>@serie.Temporadas</td>
+                        <td>@serie.FechaCreacion</td>
+                        <td>@serie.Categoria</td>
+                        <td>
+                            <a asp-route-id="@serie.Id" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Editar</a>
+                            <a asp-route-id="@serie.Id" class="btn btn-danger"><i class="bi bi-trash3"></i> Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -17,7 +17,7 @@ namespace JefflixMVC.Controllers
         }
         public IActionResult Index()
         {
-            var categoriasEntidadaes = _context.Categorias.ToList();
+            var categoriasEntidadaes = _context.Categorias.Where(c => c.Activo).ToList();
             var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categoriasEntidadaes);
             return View(categoriasDTO);
         }
@@ -32,6 +32,7 @@ namespace JefflixMVC.Controllers
             if (ModelState.IsValid)
             {
                 var entidad = _mapper.Map<Categoria>(categoriaCreacionDTO);
+                entidad.Activo = true;
                 _context.Add(entidad);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -58,8 +59,31 @@ namespace JefflixMVC.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View();   
+        }
+        public IActionResult Borrar([FromRoute] int id)
+        {
+            var categoria = _context.Categorias.FirstOrDefault(c => c.Id == id);
+            if (categoria == null)
+            {
+                return View();
+            }
+            CategoriaDTO categoriaDTO = _mapper.Map<CategoriaDTO>(categoria);
+            return View(categoriaDTO);
+        }
+        [HttpPost]
+        public IActionResult Borrar(CategoriaDTO categoriaDTO)
+        {
+            var categoria = _context.Categorias.FirstOrDefault(c => c.Id == categoriaDTO.Id);
+            if (categoria == null)
+            {
+                return View();
+            }
+            //_context.Categorias.Remove(categoria);
+            //_context.SaveChanges();
+            categoria.Activo = false;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
