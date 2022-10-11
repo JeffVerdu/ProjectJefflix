@@ -50,5 +50,67 @@ namespace JefflixMVC.Controllers
             serie.CategoriasLista = CategoriasLista;
             return View(serie);
         }
+        public IActionResult Editar([FromRoute] int id)
+        {
+            var serieEntidad = _context.Series.FirstOrDefault(s => s.Id == id);
+            if (serieEntidad == null)
+            {
+                return View();
+            }
+            var categorias = _context.Categorias.Where(c => c.Activo).ToList();
+            var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categorias);
+            SelectList CategoriasLista = new SelectList(categoriasDTO, "Id", "Name");
+            var serieParaEditar = _mapper.Map<SerieEdicionDTO>(serieEntidad);
+            serieParaEditar.CategoriasLista = CategoriasLista;
+            return View(serieParaEditar);
+        }
+        [HttpPost]
+        public IActionResult Editar(SerieEdicionDTO serieEdicionDTO)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var serieEntidad = _context.Series.FirstOrDefault(s => s.Id == serieEdicionDTO.Id);
+                serieEntidad.Director = serieEdicionDTO.Director;
+                serieEntidad.Portada = serieEdicionDTO.Portada;
+                serieEntidad.FechaCreacion = serieEdicionDTO.FechaCreacion;
+                serieEntidad.Nombre = serieEdicionDTO.Nombre;
+                serieEntidad.PaisOrigen = serieEdicionDTO.PaisOrigen;
+                serieEntidad.Temporadas = serieEdicionDTO.Temporadas;
+                serieEntidad.CategoriaId = serieEdicionDTO.CategoriaId;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            var categorias = _context.Categorias.Where(c => c.Activo).ToList();
+            var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categorias);
+            SelectList CategoriasLista = new SelectList(categoriasDTO, "Id", "Name");
+            var serie = new SerieEdicionDTO();
+            serie.CategoriasLista = CategoriasLista;
+            return View(serie);
+        }
+        public IActionResult Borrar([FromRoute] int id)
+        {
+            var serie = _context.Series.FirstOrDefault(s => s.Id == id);
+            if (serie == null)
+            {
+                return View();
+            }
+            SerieDTO serieDTO = _mapper.Map<SerieDTO>(serie);
+            return View(serieDTO);
+        }
+        [HttpPost]
+        public IActionResult Borrar(SerieDTO serieDTO)
+        {
+            var serie = _context.Series.FirstOrDefault(s => s.Id == serieDTO.Id);
+            if (serie == null)
+            {
+                return View();
+            }
+            //_context.Categorias.Remove(categoria);
+            //_context.SaveChanges();
+            serie.Activo = false;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

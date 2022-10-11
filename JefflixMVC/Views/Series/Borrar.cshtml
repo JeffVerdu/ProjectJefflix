@@ -1,0 +1,19 @@
+﻿@using JefflixMVC.Models.DTOS
+@model SerieDTO
+
+<div>
+    <div class="card col-6 border-0">
+        <div class="card-header bg-black text-white">
+            <h3>Eliminar Serie</h3>
+        </div>
+        <form method="post">
+            <div class="card-body bg-black">
+                <p class="text-white">¿Esta seguro que desea eliminar la Serie "@Model.Nombre" ?</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between bg-black">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a asp-controller="Series" asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
