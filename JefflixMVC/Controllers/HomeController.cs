@@ -1,4 +1,6 @@
-﻿using JefflixMVC.Models;
+﻿using AutoMapper;
+using JefflixMVC.Models;
+using JefflixMVC.Models.DTOS;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +9,21 @@ namespace JefflixMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IMapper mapper)
         {
             _logger = logger;
+            _context = context;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var seriesEntidades = _context.Series.Where(s => s.Activo).ToList();
+            var seriesDTO = _mapper.Map<List<SerieParaMostrarDTO>>(seriesEntidades);
+            return View(seriesDTO);
         }
 
         public IActionResult Privacy()

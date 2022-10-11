@@ -19,7 +19,7 @@ namespace JefflixMVC.Controllers
         }
         public IActionResult Index()
         {
-            var serieEntidades = _context.Series.Where(s => s.Activo).ToList();
+            var serieEntidades = _context.Series.Where(s => s.Activo).Include(s => s.Categoria).ToList();
             var seriesDTO = _mapper.Map<List<SerieDTO>>(serieEntidades);
             return View(seriesDTO);
         }
